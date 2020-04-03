@@ -1,9 +1,0 @@
-package com.bolsadeideas.springboot.backend.apirest.models.entity;
-
-class HolaMundo {
-    String sHola="¡Hola mundo!";
-
-    public static void main( String args[] ) {
-       System.out.println( this.sHola );
-    }
-}
