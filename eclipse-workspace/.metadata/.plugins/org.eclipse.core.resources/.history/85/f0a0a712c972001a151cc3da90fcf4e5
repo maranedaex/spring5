@@ -1,0 +1,31 @@
+package com.bolsadeideas.springboot.backend.apirest.models.entity;
+
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class Test {
+
+	public static void main(String[] args) {
+		/* Código Uno*/
+		int x= 0;
+		do {
+		  System.out.println(x);
+		  x++;
+		} while (x<10);
+        System.out.println("----");
+		/* Código Dos */
+		int y= 0;
+		while (y<10){
+		  System.out.println(y);
+		  y++;
+		}
+	
+	} //fin
+	
+	 public class MiPrimerApplet extends Applet {  
+		   public void paint(Graphics g){
+		     g.drawString("Hola Mundo",40,80);
+		   }
+		}
+
+}

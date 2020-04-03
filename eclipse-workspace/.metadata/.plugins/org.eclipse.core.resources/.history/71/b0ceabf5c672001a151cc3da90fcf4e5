@@ -1,0 +1,20 @@
+package com.bolsadeideas.springboot.backend.apirest.models.entity;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int suma = 0;
+		int y = 1;
+		int x = 0;
+				
+		while (x<100) {
+		  if (y%2!=0) {
+		    suma+=y;
+		    x++;
+		  }
+		  y++;
+		}
+	}
+
+}

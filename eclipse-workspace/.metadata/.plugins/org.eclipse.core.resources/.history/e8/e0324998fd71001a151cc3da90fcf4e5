@@ -1,0 +1,27 @@
+package com.bolsadeideas.springboot.backend.apirest.aop;
+
+import org.apache.logging.log4j.LogManager;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Component
+@Aspect
+public class ApiLogs {
+	
+	@Pointcut("@annotation(org.spring.framework.web.bind.annotation.RequestMapping)")
+	public void allFResources() {
+		
+	}
+	
+	@Before("allResources()")
+	public void apiRequestLogs(JoinPoint jp) {
+		LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info("------o-------->");
+		String log = jp.getSignature().getName() + ">>>";
+		for(Object arg: jp.getArgs()  ) {
+		   log += "\n  ARG: " + arg;
+	    }
+		LogManager.getLogger(jp.getSignature().getDeclaringTypeName()).info(log);
+    }
