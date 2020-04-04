@@ -8,14 +8,14 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   @Input() paginador: any;
 
-  paginas: number[];
+  public paginas: number[];
 
-  desde: number;
-  hasta: number;
+  public desde: number;
+  public hasta: number;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initPaginator();
   }
 

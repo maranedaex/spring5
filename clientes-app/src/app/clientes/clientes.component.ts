@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
-import swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
@@ -40,26 +41,21 @@ export class ClientesComponent implements OnInit {
   }
 
   delete(cliente: Cliente): void {
-    swal({
+    Swal.fire({
       title: 'Está seguro?',
-      text: `¿Seguro que desea eliminar al cliente ${cliente.nombre} ${cliente.apellido}?`,
-      type: 'warning',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar!',
-      cancelButtonText: 'No, cancelar!',
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false,
-      reverseButtons: true
+      confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
 
         this.clienteService.delete(cliente.id).subscribe(
           () => {
             this.clientes = this.clientes.filter(cli => cli !== cliente)
-            swal(
+            Swal.fire(
               'Cliente Eliminado!',
               `Cliente ${cliente.nombre} eliminado con éxito.`,
               'success'

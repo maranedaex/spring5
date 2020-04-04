@@ -4,7 +4,8 @@ import { Cliente } from './cliente';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import { Router } from '@angular/router';
 
@@ -50,7 +51,7 @@ export class ClienteService {
           }
 
           console.error(e.error.mensaje);
-          swal(e.error.mensaje, e.error.error, 'error');
+          Swal.fire(e.error.mensaje, e.error.error, 'error');
           return throwError(e);
         })
       );
@@ -61,7 +62,7 @@ export class ClienteService {
       catchError(e => {
         this.router.navigate(['/clientes']);
         console.error(e.error.mensaje);
-        swal('Error al editar', e.error.mensaje, 'error');
+        Swal.fire('Error al editar', e.error.mensaje, 'error');
         return throwError(e);
       })
     );
@@ -76,7 +77,7 @@ export class ClienteService {
         }
 
         console.error(e.error.mensaje);
-        swal(e.error.mensaje, e.error.error, 'error');
+        Swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
@@ -86,7 +87,7 @@ export class ClienteService {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         console.error(e.error.mensaje);
-        swal(e.error.mensaje, e.error.error, 'error');
+        Swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
