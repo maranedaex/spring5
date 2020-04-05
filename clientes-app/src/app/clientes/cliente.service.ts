@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 //import { DatePipe, formatDate } from '@angular/common';
 import { Cliente } from './cliente';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-//import Swal from 'sweetalert2';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+
+import swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
 import { Router } from '@angular/router';
 
@@ -51,7 +51,7 @@ export class ClienteService {
           }
 
           console.error(e.error.mensaje);
-          Swal.fire(e.error.mensaje, e.error.error, 'error');
+          swal.fire(e.error.mensaje, e.error.error, 'error');
           return throwError(e);
         })
       );
@@ -62,7 +62,7 @@ export class ClienteService {
       catchError(e => {
         this.router.navigate(['/clientes']);
         console.error(e.error.mensaje);
-        Swal.fire('Error al editar', e.error.mensaje, 'error');
+        swal.fire('Error al editar', e.error.mensaje, 'error');
         return throwError(e);
       })
     );
@@ -77,7 +77,7 @@ export class ClienteService {
         }
 
         console.error(e.error.mensaje);
-        Swal.fire(e.error.mensaje, e.error.error, 'error');
+        swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
@@ -87,10 +87,22 @@ export class ClienteService {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         console.error(e.error.mensaje);
-        Swal.fire(e.error.mensaje, e.error.error, 'error');
+        swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
+  }
+
+  // tslint:disable-next-line: no-unused-expression
+  // tslint:disable-next-line: align
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
+
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/uploads`, formData ,{ reportProgress: true});
+    return this.http.request(req);
   }
 
 }
